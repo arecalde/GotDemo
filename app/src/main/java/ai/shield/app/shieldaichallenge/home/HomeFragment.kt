@@ -15,7 +15,6 @@ import androidx.fragment.app.viewModels
 class HomeFragment : Fragment() {
 
     private val viewModel: HomeViewModel by viewModels()
-    private var episode: List<Episode>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,11 +24,10 @@ class HomeFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        viewModel.episodeList.observe(viewLifecycleOwner) {
-            episode = it
+        viewModel.episodeList.observe(viewLifecycleOwner) { episodes ->
 
             val adapter = ItemAdapter<Episode, ListItemBinding>(
-                it,
+                episodes,
                 viewLifecycleOwner,
                 R.layout.list_item
             ) { episode, listItemBinding ->

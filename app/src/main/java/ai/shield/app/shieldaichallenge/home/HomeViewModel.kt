@@ -1,5 +1,6 @@
 package ai.shield.app.shieldaichallenge.home
 
+import ai.shield.app.shieldaichallenge.helpers.SharedPreferencesHelper
 import ai.shield.app.shieldaichallenge.model.Episode
 import ai.shield.app.shieldaichallenge.model.GOTJsonResult
 import android.app.Application
@@ -30,16 +31,20 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
 
     private var selectedEpisodeIndex = -1
 
+    private val context: Context
+        get() = application.applicationContext
+    init {
+        loadJson()
+    }
     fun updateEpisode(newEpisodeIndex: Int) {
         if (selectedEpisodeIndex != newEpisodeIndex) {
             selectedEpisodeIndex = newEpisodeIndex
+            SharedPreferencesHelper.setEpisodeId(context, newEpisodeIndex)
             episodeSelected.value = episodeList.value?.get(newEpisodeIndex)
         }
     }
 
-    private val context: Context
-        get() = application.applicationContext
-    init {
+    private fun loadJson() {
         val gotEpisodeIS = context.assets.open("game_of_thrones_episodes.txt")
 
         val textBuilder = StringBuilder()

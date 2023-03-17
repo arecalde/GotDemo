@@ -30,16 +30,20 @@ class ItemAdapter<T, B : ViewDataBinding>(private val items: List<T>, private va
     }
 
     override fun onBindViewHolder(holder: MyViewHolder<T, B>, position: Int) {
+        val view = holder.itemView
+
+        val sharedPreferencesId = SharedPreferencesHelper.getEpisodeId(view.context)
+        if (!selectedItem.isInitialized && sharedPreferencesId != -1) {
+            selectedItem.value = sharedPreferencesId
+        }
         val item = items[position]
         holder.bind(item)
 
-        val view = holder.itemView
 
         view.setOnClickListener {
             notifyItemChanged(selectedItem.value ?: 0)
             selectedItem.value = holder.adapterPosition
             notifyItemChanged(holder.adapterPosition)
-
         }
 
         if (selectedItem.value == holder.adapterPosition) {

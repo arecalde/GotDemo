@@ -15,12 +15,17 @@
 
     <LinearLayout
         android:orientation="horizontal"
+        android:clipToPadding="false"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/episodeList"
+            android:elevation="8dp"
+            android:padding="10dp"
+            android:background="@color/white"
+            android:shadowColor="@color/shield_charcoal_grey"
             tools:listitem="@layout/list_item"
             android:layout_weight="1"
             android:layout_width="0dp"
@@ -39,6 +44,7 @@
         imageUrl="@{viewModel.photoUrl}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        tools:src="@drawable/ic_launcher_background"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -47,6 +53,9 @@
 
     <TextView
         tools:text="Summary"
+        android:padding="16dp"
+        android:textSize="16sp"
+
         android:text="@{ Html.fromHtml(viewModel.summary) }"
         android:gravity="center"
         android:layout_width="match_parent"
