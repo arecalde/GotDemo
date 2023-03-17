@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="episode"
+            type="ai.shield.app.shieldaichallenge.model.Episode" />
+    </data>
+
+    <LinearLayout
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:layout_width="match_parent"
+        android:id="@+id/item_layout"
+                  android:layout_height="wrap_content"
+                  android:gravity="center_vertical"
+                  android:minHeight="48dp"
+                  android:orientation="horizontal"
+                  android:paddingStart="16dp"
+                  android:paddingEnd="16dp">
+    
+        <ImageView
+                imageUrl="@{episode.imageUrl}"
+                tools:src="@drawable/ic_launcher_background"
+                android:id="@+id/label_thumbnail"
+                android:layout_width="32dp"
+                android:layout_height="18dp"
+                android:layout_margin="8dp"
+                tools:ignore="ContentDescription"/>
+    
+        <TextView
+                android:id="@+id/label_name"
+                tools:text="@string/thumbnail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{episode.title}"/>
+    
+    </LinearLayout>
+</layout>
